@@ -5,6 +5,8 @@ Password Generator for ethical hackers
 
 $ chmod +x install.sh
 $ ./install.sh
+
+
 [HOW TO USE]
 
 $ pgen

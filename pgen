@@ -1,0 +1,106 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+import random, sys, string
+
+def help():
+    print("""
+    usage:  pgen -<options> [values]
+    ex:     pgen -s "alfa 2006" -l 8
+
+        -a      - add lphebet letters combination.
+        -c      - add capital letters combination.
+        -C      - add special characters.
+        -H      - show this message.
+        --help  -show this message.
+        -l      - define the length of the password.
+        -s      - specific words and any other special things to add
+                    '-s "Robin 1999 June red a & 1 2 3"'.
+        -S      - add spaces to the password
+                    '-S 1' will make 1 space and  '-S 2' will add 2 space
+                     on row and so on.
+        --save  - save the passwords into a text file '--save password.txt'.
+        -r      - how many items should be added to a password.
+        """
+    )
+
+def processor(sysArgv):
+    fileName = "none"
+    ammoBox = []
+    itemsPerPasssword = 2
+    sysArgv.remove(sysArgv[0])
+    if "-a" in sysArgv:
+        ammoBox += list(string.ascii_lowercase)
+    if "-c" in sysArgv:
+        ammoBox += list(string.ascii_uppercase)
+    if "-C" in sysArgv:
+        ammoBox += ['+', '/', '']
+    if "-l" in sysArgv:
+        try:
+            passwordLen = sysArgv[int(sysArgv.index('-l') + 1)]
+        except:
+            passwordLen = "none"
+            help()
+    if "-s" in sysArgv:
+        try:
+            ammoBox += sysArgv[sysArgv.index("-s") + 1].split(" ")
+        except:
+            help()
+    if "-S" in sysArgv:
+        try:
+            spaces = int(sysArgv.index('-l') + 1)
+            ammoBox += " " * spaces
+        except:
+            spaces = "none"
+            help()
+    if "-r" in sysArgv:
+        try:
+            itemsPerPasssword = int(sysArgv[int(sysArgv.index('-r') + 1)])
+        except:
+            help()
+    if "--save" in sysArgv:
+        try:
+            fileName = str(sysArgv[int(sysArgv.index('--save') + 1)])
+        except:
+            fileName = "pgen-passwordlist" + str(random.randrange(100000000, 999999999))
+    try:
+        ranGen(itemsPerPasssword, ammoBox, passwordLen, fileName)
+    except:
+        help()
+def ranGen(itemsPerPasssword, ammoBox, passwordLen, fileName):
+    passwordArray = []
+    itemsPerPasssword = int(itemsPerPasssword)
+    passwordLen = int(passwordLen)
+    countpwd=0
+    totalPwdLen = len(ammoBox) ** itemsPerPasssword
+    for l in range(totalPwdLen):
+        for i in range(itemsPerPasssword):
+            y = random.randrange(len(ammoBox))
+            if i == 0:
+                created_pwd = ammoBox[y]
+            else:
+                created_pwd = created_pwd + ammoBox[y]
+        if len(created_pwd) >= passwordLen:
+            print(created_pwd)
+            passwordArray += [created_pwd]
+            countpwd += 1
+    if fileName == "none":
+        print("No saving")
+    else:
+        try:
+            f = open(fileName, "a")
+            for ps in passwordArray:
+                f.write(ps + "\n")
+            f.close()
+        except:
+            help()
+    print("\n[+] Generated passwords:   " + str(totalPwdLen) + "\n[*] Best posssible passwords: " + str(countpwd))
+
+################Dont remove code inside the hashtag#########
+
+if ("-h" or "--help") in sys.argv:
+    help()
+else:
+    processor(sys.argv)
+
+
+############################################################

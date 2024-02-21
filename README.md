@@ -4,6 +4,7 @@ Password Generator for ethical hackers
 [INSTTALLATION GUIDE]
 
 $ chmod +x install.sh
+
 $ ./install.sh
 
 

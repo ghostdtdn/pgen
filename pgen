@@ -95,12 +95,7 @@ def ranGen(itemsPerPasssword, ammoBox, passwordLen, fileName):
             help()
     print("\n[+] Generated passwords:   " + str(totalPwdLen) + "\n[*] Best posssible passwords: " + str(countpwd))
 
-################Dont remove code inside the hashtag#########
-
 if ("-h" or "--help") in sys.argv:
     help()
 else:
     processor(sys.argv)
-
-
-############################################################

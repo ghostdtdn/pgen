@@ -7,7 +7,7 @@ def help():
     usage:  pgen -<options> [values]
     ex:     pgen -s "alfa 2006" -l 8
 
-        -a      - add lphebet letters combination.
+        -a      - add alphebet letters combination.
         -c      - add capital letters combination.
         -C      - add special characters.
         -H      - show this message.
@@ -84,7 +84,7 @@ def ranGen(itemsPerPasssword, ammoBox, passwordLen, fileName):
             passwordArray += [created_pwd]
             countpwd += 1
     if fileName == "none":
-        print("No saving")
+        print("[!] File isn't saved...")
     else:
         try:
             f = open(fileName, "a")
